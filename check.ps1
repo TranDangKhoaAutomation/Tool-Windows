@@ -1,13 +1,13 @@
 ﻿# ==================================================
-# ITSO Windows Checker 1.2.1 - PowerShell Version (Optimized UI & Logic)
+# ITSO Windows Checker 2.0.0 - PowerShell Version (Optimized UI & Logic)
 # ==================================================
 # THIẾT LẬP HIỂN THỊ TIẾNG VIỆT CÓ DẤU (UTF-8)
 # ==================================================
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::InputEncoding = [System.Text.Encoding]::UTF8
-chcp 65001 > $null
+chcp 65001 > $null 2>&1
 
-$host.ui.RawUI.WindowTitle = "ITSO Windows Checker 1.2.1"
+$host.ui.RawUI.WindowTitle = "ITSO Windows Checker 2.0.0"
 
 # =========================
 # KIEM TRA QUYEN ADMIN
@@ -17,7 +17,7 @@ if (-not $isAdmin) {
     [Console]::ForegroundColor = "Red"
     Clear-Host
     Write-Host "=================================================="
-    Write-Host "  [CẢNH BÁO LỖI] THIẾU QUYỀN QUẢN TRỊ VIÊN"
+    Write-Host "  [CẢNH BÁO LỖI] THIẾU QUYỀN QUẢN TRỊ VIÊN - Trần Đăng Khoa"
     Write-Host "=================================================="
     Write-Host ""
     Write-Host "Tool này cần quyền Administrator để đọc ghi các "
@@ -105,37 +105,37 @@ $script:ACT = "CHƯA KÍCH HOẠT"
 $script:BIOS_KEY = "KHONG_TIM_THAY"
 $script:HWID_WARN = "0"
 $script:CHANNEL = "Không tìm thấy key"
-
+                         
 function Show-Main {
     Clear-Host
-    [Console]::ForegroundColor = "Cyan"
-    Write-Host "=================================================="
-    Write-Host "        CÔNG CỤ KIỂM TRA BẢN QUYỀN WINDOWS"
-    Write-Host "        Bản quyền: Trần Đăng Khoa - Phiên bản 1.2.1"
-    Write-Host "        Cập nhật: 19/07/2026 - https://trandangkhoatechnology.github.io/"
-    Write-Host "=================================================="
+        $art = @'
+ _____                      ___                            _   _  _
+(_   _)                    (  _`\                         ( ) ( )( )
+  | | _ __   _ _   ___     | | ) |   _ _   ___     __     | |/'/'| |__     _      _ _
+  | |( '__)/'_` )/' _ `\   | | | ) /'_` )/' _ `\ /'_ `\   | , <  |  _ `\ /'_`\  /'_` )
+  | || |  ( (_| || ( ) |   | |_) |( (_| || ( ) |( (_) |   | |\`\ | | | |( (_) )( (_| |
+  (_)(_)  `\__,_)(_) (_)   (____/'`\__,_)(_) (_)`\__  |   (_) (_)(_) (_)`\___/'`\__,_)
+                                                ( )_) |
+                                                 \___/'
+'@
+    $art -split "`n" | ForEach-Object { Write-Host $_ -ForegroundColor Cyan }
+    Write-Host ""
+    Write-Host "        CÔNG CỤ KIỂM TRA BẢN QUYỀN WINDOWS" -ForegroundColor Green
+    Write-Host "        Bản quyền: Trần Đăng Khoa - ITSO Windows Checker 2.0.0" -ForegroundColor Yellow
+    Write-Host "        Cập nhật: 21/07/2026" -ForegroundColor Yellow
+    Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host "    - Hệ điều hành   : $OS_NAME ($OS_ARCH)"
     Write-Host "    - Build          : $OS_BUILD"
     Write-Host "    - Ngày cài đặt   : $($script:OS_INSTALL_DATE)"
-    Write-Host "=================================================="
+    Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host " Công cụ giúp:"
-    Write-Host "   - Kiểm tra tính hợp pháp của Windows đang kích hoạt"
-    Write-Host "   - Phát hiện công cụ crack windows trái phép (KMS, KMS38, MAS, HWID)"
-    Write-Host "   - Gỡ bỏ key kích hoạt trái phép trên máy"
-    Write-Host "   - Kiểm tra key gốc ẩn trong BIOS (OEM từ nhà máy)"
-    Write-Host "   - Kích hoạt Windows bằng key ẩn trong BIOS"
-    Write-Host "   - Kiểm tra tính hợp lệ của key Doanh nghiệp (MAK)"
-    Write-Host "   - Thay đổi phiên bản Windows nhưng không cần cài lại"
-    Write-Host "=================================================="
-    Write-Host ""
-    Write-Host " MENU:"
-    Write-Host "   [1] Kiểm tra bản quyền Windows của máy tính đang sử dụng"
-    Write-Host "   [2] Kiểm tra và khôi phục Key gốc từ BIOS (Nếu có)"
-    Write-Host "   [3] Gỡ bỏ key và xóa crack (Đưa về nguyên trạng)"
-    Write-Host "   [4] Cách thức hoạt động của chương trình"
-    Write-Host "   [5] Thay đổi phiên bản Windows"
-    Write-Host "   [6] Thoát"
+    Write-Host " MENU:" -ForegroundColor White
+    Write-Host "   [1] Kiểm tra bản quyền Windows" -ForegroundColor Cyan
+    Write-Host "   [2] Khôi phục Key gốc từ BIOS" -ForegroundColor Cyan
+    Write-Host "   [3] Gỡ bỏ key và xóa crack" -ForegroundColor Cyan
+    Write-Host "   [4] Cách thức hoạt động" -ForegroundColor Cyan
+    Write-Host "   [5] Thay đổi phiên bản Windows" -ForegroundColor Cyan
+    Write-Host "   [6] Thoát" -ForegroundColor Cyan
     Write-Host ""
 
     $mainchoice = Read-Host "Chọn chức năng"
@@ -365,7 +365,7 @@ function Print-VTVReport {
 function Show-Crack {
     Clear-Host
     Write-Host "==================================================" -ForegroundColor Cyan
-    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN" -ForegroundColor Cyan
+    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN - Trần Đăng Khoa" -ForegroundColor Cyan
     Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host "Ngày cài đặt         : $($script:OS_INSTALL_DATE)" -ForegroundColor Cyan
     Write-Host "Phiên bản Windows    : $OS_NAME" -ForegroundColor Cyan
@@ -412,7 +412,7 @@ function Show-Crack {
 function Show-Legal {
     Clear-Host
     Write-Host "==================================================" -ForegroundColor Cyan
-    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN" -ForegroundColor Cyan
+    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN - Trần Đăng Khoa" -ForegroundColor Cyan
     Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host "Ngày cài đặt         : $($script:OS_INSTALL_DATE)" -ForegroundColor Cyan
     Write-Host "Phiên bản Windows    : $OS_NAME" -ForegroundColor Cyan
@@ -485,7 +485,7 @@ function Show-Legal {
 function Show-MakKey {
     Clear-Host
     Write-Host "==================================================" -ForegroundColor Cyan
-    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN" -ForegroundColor Cyan
+    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN - Trần Đăng Khoa" -ForegroundColor Cyan
     Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host "Ngày cài đặt         : $($script:OS_INSTALL_DATE)" -ForegroundColor Cyan
     Write-Host "Phiên bản Windows    : $OS_NAME" -ForegroundColor Cyan
@@ -700,7 +700,7 @@ function Show-HowItWorks {
 function Show-Unknown {
     Clear-Host
     Write-Host "==================================================" -ForegroundColor Cyan
-    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN" -ForegroundColor Cyan
+    Write-Host "            KẾT QUẢ KIỂM TRA BẢN QUYỀN - Trần Đăng Khoa" -ForegroundColor Cyan
     Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host "Ngày cài đặt         : $($script:OS_INSTALL_DATE)" -ForegroundColor Cyan
     Write-Host "Phiên bản Windows    : $OS_NAME" -ForegroundColor Cyan
