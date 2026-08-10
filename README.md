@@ -53,8 +53,31 @@ Chuyển đổi giữa các phiên bản (Pro, Enterprise, Education) mà không
 | **MAK_KEY** | Key doanh nghiệp (MAK) - không phải crack |
 | **UNKNOWN** | Không đủ bằng chứng để kết luận |
 
-
 ## Cách chạy
+
+### Chạy trực tiếp bằng PowerShell — không cần tải hoặc clone
+
+Mở **PowerShell với quyền Administrator** rồi chạy một lệnh duy nhất:
+
+```powershell
+irm https://raw.githubusercontent.com/TranDangKhoaTechnology/Tool-Windows/main/check.ps1 | iex
+```
+
+Lệnh đầy đủ tương đương:
+
+```powershell
+Invoke-RestMethod https://raw.githubusercontent.com/TranDangKhoaTechnology/Tool-Windows/main/check.ps1 | Invoke-Expression
+```
+
+Nếu đang dùng **PowerShell 7 (`pwsh`)**, có thể chạy từ CMD/Run/Terminal bằng:
+
+```powershell
+pwsh -NoProfile -Command "irm https://raw.githubusercontent.com/TranDangKhoaTechnology/Tool-Windows/main/check.ps1 | iex"
+```
+
+> **Lưu ý:** Tool yêu cầu quyền Administrator. Cách chạy trực tiếp ở trên lấy phiên bản `check.ps1` mới nhất từ nhánh `main` của repository mỗi lần chạy.
+
+### Chạy sau khi tải repository
 
 Nhấp đúp vào `run_tool-check.bat`, chọn **Yes** khi Windows yêu cầu quyền Administrator.
 
