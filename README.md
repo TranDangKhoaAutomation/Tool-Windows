@@ -109,6 +109,6 @@ Việc sử dụng Windows/Office crack là bất hợp pháp và vi phạm đi�
 
 ## Bản quyền
 
-Copyright (c) 2026 Trần Đăng Khoa. All rights reserved.
+Copyright (c) 2026 Trần Đăng Khoa / TranDangKhoaAutomation. All rights reserved.
 
 Xem điều khoản đầy đủ trong [LICENSE](LICENSE).
