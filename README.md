@@ -60,19 +60,19 @@ Chuyển đổi giữa các phiên bản (Pro, Enterprise, Education) mà không
 Mở **PowerShell với quyền Administrator** rồi chạy một lệnh duy nhất:
 
 ```powershell
-irm https://raw.githubusercontent.com/TranDangKhoaTechnology/Tool-Windows/main/check.ps1 | iex
+irm https://raw.githubusercontent.com/TranDangKhoaAutomation/Tool-Windows/main/check.ps1 | iex
 ```
 
 Lệnh đầy đủ tương đương:
 
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/TranDangKhoaTechnology/Tool-Windows/main/check.ps1 | Invoke-Expression
+Invoke-RestMethod https://raw.githubusercontent.com/TranDangKhoaAutomation/Tool-Windows/main/check.ps1 | Invoke-Expression
 ```
 
 Nếu đang dùng **PowerShell 7 (`pwsh`)**, có thể chạy từ CMD/Run/Terminal bằng:
 
 ```powershell
-pwsh -NoProfile -Command "irm https://raw.githubusercontent.com/TranDangKhoaTechnology/Tool-Windows/main/check.ps1 | iex"
+pwsh -NoProfile -Command "irm https://raw.githubusercontent.com/TranDangKhoaAutomation/Tool-Windows/main/check.ps1 | iex"
 ```
 
 > **Lưu ý:** Tool yêu cầu quyền Administrator. Cách chạy trực tiếp ở trên lấy phiên bản `check.ps1` mới nhất từ nhánh `main` của repository mỗi lần chạy.
